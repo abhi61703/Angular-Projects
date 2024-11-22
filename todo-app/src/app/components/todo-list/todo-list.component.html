@@ -1,0 +1,61 @@
+<div class="p-d-flex p-flex-column p-ai-center p-mt-5">
+  <!-- Title Section -->
+  <h2 class="p-text-center p-mb-4" style="color: #FF6347;">To-Do List</h2>
+
+  <!-- Input Section -->
+  <div class="p-inputgroup p-mb-4" style="width: 50%; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); border-radius: 8px;">
+    <input 
+      type="text" 
+      [(ngModel)]="newTask" 
+      placeholder="Add a new task" 
+      class="p-inputtext p-component p-p-2" 
+      style="flex: 1; border-radius: 8px 0 0 8px;" />
+    <button 
+      pButton 
+      type="button" 
+      label="Add Task" 
+      icon="pi pi-plus" 
+      (click)="addTask()" 
+      class="p-button-success p-button-rounded p-p-3" 
+      style="border-radius: 0 8px 8px 0;">
+    </button>
+  </div>
+
+  <!-- Table Section -->
+  <p-table 
+  [value]="tasks" 
+  [paginator]="true" 
+  [rows]="5" 
+  [responsiveLayout]="'scroll'" 
+  [ngStyle]="{ 'width': '80%', 'box-shadow': '0px 4px 10px rgba(0, 0, 0, 0.1)' }"
+  [ngClass]="{'p-mt-3': true, 'p-shadow-2': true}" >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Task</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-task>
+      <tr>
+        <td>{{ task.name }}</td>
+        <td>
+          <p-checkbox 
+            [(ngModel)]="task.completed" 
+            binary="true" 
+            styleClass="p-checkbox-rounded">
+          </p-checkbox>
+        </td>
+        <td>
+          <button 
+            pButton 
+            type="button" 
+            icon="pi pi-trash" 
+            class="p-button-danger p-button-rounded p-mr-2" 
+            (click)="deleteTask(task)">
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
